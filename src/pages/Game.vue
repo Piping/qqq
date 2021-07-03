@@ -6,7 +6,8 @@
         <q-toolbar
           class="bg-purple text-white"
         >
-        <q-btn push color="blue-7 q-ma-md" label="Create New Questions" @click="pinSubmit" />
+        <q-btn push color="blue-7 q-ma-md" label="Create New Questions" @click="pinSubmit()" />
+        <q-btn push color="green-7 q-ma-md" label="Start Game" @click="startGame()" />
         <q-tabs
           v-model="tab"
           dense
@@ -84,7 +85,7 @@
 import { defineComponent, ref } from 'vue';
 
 export default defineComponent({
-  name: 'PageIndex',
+  name: 'GamePage',
   setup() {
 
     const listOfQuestions = [
@@ -96,8 +97,12 @@ export default defineComponent({
       { name: 'Q6', icon: 'people', label: 'Address Book' }
     ];
 
+    function startGame() {
+      this.$router.push({ name: 'gameroom', params: { gameId: '6666' } });
+    }
     return {
       tab: ref('mails'),
+      startGame,
     }
   }
 })
