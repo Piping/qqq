@@ -2,6 +2,7 @@
     <q-page class="flex flex-center q-gutter-md">
     <q-btn push color="purple"
            label="Create a Game"
+           @click="createGame()"
     />
     <q-btn push color="primary"
            label="Join a Game"
@@ -37,8 +38,12 @@ export default defineComponent({
   name: 'PageIndex',
   setup() {
     const enterPin = ref(false);
+    function createGame() {
+       this.$router.push({ path: "/game" });
+    }
     return {
       enterPin,
+      createGame,
     }
   }
 })
