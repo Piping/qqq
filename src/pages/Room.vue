@@ -29,7 +29,7 @@
                    <q-item-label caption class="text-center"> Questions </q-item-label>
                  </q-item-section>
                  <q-item-section>
-                   <q-item-label class="text-center text-h4"> 3 </q-item-label>
+                   <q-item-label class="text-center text-h4"> {{ rows.length }} </q-item-label>
                    <q-item-label caption class="text-center"> Players </q-item-label>
                  </q-item-section>
                </q-item>
