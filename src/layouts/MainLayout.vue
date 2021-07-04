@@ -17,7 +17,7 @@
   <q-layout view="lHh Lpr lFf">
     <q-header elevated>
       <q-toolbar>
-        <q-btn flat round dense class="shake shake-constant shake-constant--hover" icon="assignment_ind" />
+        <q-btn flat round dense class="shake shake--hover" icon="assignment_ind" />
         <q-toolbar-title class="shake">
           QQQ!
         </q-toolbar-title>
