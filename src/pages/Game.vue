@@ -6,7 +6,7 @@
         <q-toolbar
           class="bg-purple text-white"
         >
-        <q-btn push color="blue-7 q-ma-md" label="Create New Questions" @click="pinSubmit()" />
+        <q-btn push color="blue-7 q-ma-md" label="New Question" @click="pinSubmit()" />
         <q-btn push color="green-7 q-ma-md" label="Start Game" @click="startGame()" />
         <q-tabs
           v-model="tab"
@@ -24,38 +24,66 @@
 
         <q-tab-panels v-model="tab" animated  class="bg-purple-1 text-center">
           <q-tab-panel name="mails" style="max-height:65vh;">
-            <div class="text-h6">Q1: Who has the golden apple?</div>
-            <p class="q-mb-xs"> Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+            <div class="text-h6">
+              {{listOfQuestions[0].question_header}}
+              <q-popup-edit
+                v-model="listOfQuestions[0].question_header"
+                :cover="false" :offset="[0, 5]" v-slot="scope"
+                max-width="360px"
+                auto-save
+                buttons
+              >
+               <q-input
+                v-model="scope.value"
+                min-height="5rem"
+                autofocus
+                @keyup.enter.stop
+              />
+              </q-popup-edit>
+            </div>
+            <p class="q-mb-xs">
+              {{ listOfQuestions[0].question_text }}
+              <q-popup-edit
+                v-model="listOfQuestions[0].question_text"
+                :cover="false" :offset="[0, 5]" v-slot="scope"
+                max-width="360px"
+                auto-save
+                buttons
+              >
+               <q-editor
+                v-model="scope.value"
+                min-height="5rem"
+                autofocus
+                @keyup.enter.stop
+              />
+              </q-popup-edit>
             </p>
             <div class="row fit row wrap justify-center items-start content-start">
               <div class="col-12 col-md-6 q-pa-sm">
                 <q-card class="my-card">
                   <q-card-section>
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
-                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {{listOfQuestions[0].answer_option[0]}}
                   </q-card-section>
                 </q-card>
               </div>
               <div class="col-12 col-md-6 q-pa-sm">
             <q-card class="my-card">
               <q-card-section>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {{listOfQuestions[0].answer_option[1]}}
               </q-card-section>
             </q-card>
               </div>
               <div class="col-12 col-md-6 q-pa-sm">
             <q-card class="my-card">
               <q-card-section>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {{listOfQuestions[0].answer_option[2]}}
               </q-card-section>
             </q-card>
               </div>
               <div class="col-12 col-md-6 q-pa-sm">
             <q-card class="my-card">
               <q-card-section>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit.
+                    {{listOfQuestions[0].answer_option[3]}}
               </q-card-section>
             </q-card>
               </div>
@@ -88,8 +116,21 @@ export default defineComponent({
   name: 'GamePage',
   setup() {
 
-    const listOfQuestions = [
-      { name: 'Q1', icon: 'mail', label: 'Mails' },
+    let listOfQuestions = [
+      { name: 'Q1', icon: 'mail', label: 'Mails',
+        question_header: 'Q1: Who has the golden apple?',
+        question_text: `
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
+        answer_option: [
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+          'Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+        ],
+        answer_at: 0,
+      },
       { name: 'Q2', icon: 'alarm', label: 'Alarms' },
       { name: 'Q3', icon: 'movie', label: 'Movies' },
       { name: 'Q4', icon: 'photo', label: 'Photos' },
@@ -103,6 +144,7 @@ export default defineComponent({
     return {
       tab: ref('mails'),
       startGame,
+      listOfQuestions: ref(listOfQuestions),
     }
   }
 })
