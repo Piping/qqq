@@ -25,68 +25,67 @@
         <q-tab-panels v-model="tab" animated  class="bg-purple-1 text-center">
           <q-tab-panel name="mails" style="max-height:65vh;">
             <div class="text-h6">
-              {{listOfQuestions[0].question_header}}
+              <p v-html="listOfQuestions[0].question_header"></p>
               <q-popup-edit
                 v-model="listOfQuestions[0].question_header"
-                :cover="false" :offset="[0, 5]" v-slot="scope"
-                max-width="360px"
-                auto-save
-                buttons
-              >
-               <q-input
-                v-model="scope.value"
-                min-height="5rem"
-                autofocus
-                @keyup.enter.stop
-              />
-              </q-popup-edit>
-            </div>
-            <p class="q-mb-xs">
-              {{ listOfQuestions[0].question_text }}
-              <q-popup-edit
-                v-model="listOfQuestions[0].question_text"
-                :cover="false" :offset="[0, 5]" v-slot="scope"
-                max-width="360px"
+                :cover="false" v-slot="scope"
+                anchor="center middle"
+                max-width="720px"
                 auto-save
                 buttons
               >
                <q-editor
                 v-model="scope.value"
                 min-height="5rem"
+                content-class="bg-purple-1"
                 autofocus
                 @keyup.enter.stop
               />
               </q-popup-edit>
-            </p>
+            </div>
+            <div class="q-mb-xs">
+              <p v-html="listOfQuestions[0].question_text"></p>
+              <q-popup-edit
+                v-model="listOfQuestions[0].question_text"
+                :cover="false" v-slot="scope"
+                anchor="center middle"
+                max-width="720px"
+                auto-save
+                buttons
+              >
+               <q-editor
+                v-model="scope.value"
+                content-class="bg-purple-1"
+                min-height="5rem"
+                autofocus
+                @keyup.enter.stop
+              />
+              </q-popup-edit>
+            </div>
             <div class="row fit row wrap justify-center items-start content-start">
-              <div class="col-12 col-md-6 q-pa-sm">
-                <q-card class="my-card">
-                  <q-card-section>
-                    {{listOfQuestions[0].answer_option[0]}}
-                  </q-card-section>
-                </q-card>
-              </div>
-              <div class="col-12 col-md-6 q-pa-sm">
-            <q-card class="my-card">
-              <q-card-section>
-                    {{listOfQuestions[0].answer_option[1]}}
-              </q-card-section>
-            </q-card>
-              </div>
-              <div class="col-12 col-md-6 q-pa-sm">
-            <q-card class="my-card">
-              <q-card-section>
-                    {{listOfQuestions[0].answer_option[2]}}
-              </q-card-section>
-            </q-card>
-              </div>
-              <div class="col-12 col-md-6 q-pa-sm">
-            <q-card class="my-card">
-              <q-card-section>
-                    {{listOfQuestions[0].answer_option[3]}}
-              </q-card-section>
-            </q-card>
-              </div>
+              <template v-for="option in listOfQuestions[0].answer_option" :key="option.order">
+                <div class="col-12 col-md-6 q-pa-sm">
+                  <q-card class="my-card">
+                    <q-card-section v-html="option.content"/>
+                    <q-popup-edit
+                      v-model="option.content"
+                      :cover="false" v-slot="scope"
+                      anchor="center middle"
+                      max-width="720px"
+                      auto-save
+                      buttons
+                    >
+                     <q-editor
+                      v-model="scope.value"
+                      content-class="bg-purple-1"
+                      min-height="5rem"
+                      autofocus
+                      @keyup.enter.stop
+                    />
+                    </q-popup-edit>
+                  </q-card>
+                </div>
+              </template>
             </div>
             <q-page-scroller position="bottom-right" :scroll-offset="150" :offset="[18, 18]">
               <q-btn fab icon="keyboard_arrow_up" color="accent" />
@@ -124,10 +123,10 @@ export default defineComponent({
           Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.
           Lorem ipsum dolor sit amet consectetur adipisicing elit.  Lorem ipsum dolor sit amet consectetur adipisicing elit.`,
         answer_option: [
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit.',
-          'Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.',
+          { order: 'A', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.', },
+          { order: 'B', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',},
+          { order: 'C', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.',},
+          { order: 'D', content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.Lorem ipsum dolor sit amet consectetur adipisicing elit.',},
         ],
         answer_at: 0,
       },
