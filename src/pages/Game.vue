@@ -6,8 +6,12 @@
         <q-toolbar
           class="bg-purple text-white"
         >
-        <q-btn push color="blue-7 q-ma-md" label="New Question" @click="pinSubmit()" />
-        <q-btn push color="green-7 q-ma-md" label="Start Game" @click="startGame()" />
+        <q-btn push color="blue-7 q-ma-xs" label="New Question" @click="pinSubmit()" />
+        <q-btn push color="green-7 q-ma-xs" label="Start Game" @click="startGame()" />
+        </q-toolbar>
+        <q-toolbar
+          class="bg-purple-1 text-black"
+        >
         <q-tabs
           v-model="tab"
           dense
@@ -48,7 +52,7 @@
               <q-popup-edit
                 v-model="listOfQuestions[0].question_text"
                 :cover="false" v-slot="scope"
-                anchor="center middle"
+                anchor="center start"
                 max-width="720px"
                 auto-save
                 buttons
@@ -70,7 +74,7 @@
                     <q-popup-edit
                       v-model="option.content"
                       :cover="false" v-slot="scope"
-                      anchor="center middle"
+                      :anchor='true ? "center start" : "center middle"'
                       max-width="720px"
                       auto-save
                       buttons
